@@ -7,8 +7,6 @@ const app = express();
 
 dotenv.config();
 
-app.use(middleware({tracer: tracer}));
-
 const port = process.env.PORT;
 
 
