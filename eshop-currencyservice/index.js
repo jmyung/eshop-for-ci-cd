@@ -4,7 +4,7 @@ const app = express();
 const data = require('./data/initial-data.json');
 const dotenv = require('dotenv');
 dotenv.config();
-const middleware = require('express-opentracing').middleware;
+const opentracing = require('express-opentracing');
 
 const tracer = require('./tracer')('currencyservice');
 
