@@ -1,13 +1,12 @@
+const tracer = require('./tracer')('eshop-productservice');
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const Product = require("./product-model")
-const middleware = require('express-opentracing').default;
 const app = express();
 
 dotenv.config();
 
-const tracer = require('./tracer')('currencyservice');
 app.use(middleware({tracer: tracer}));
 
 const port = process.env.PORT;
