@@ -4,13 +4,11 @@ const app = express();
 const data = require('./data/initial-data.json');
 const dotenv = require('dotenv');
 dotenv.config();
-const opentracing = require('express-opentracing');
-
+const middleware = require('express-opentracing').default;
 const tracer = require('./tracer')('currencyservice');
-
 const port = process.env.PORT || 8094;
 
-app.use(json());
+app.use(bodyParser.json());
 app.use(middleware({tracer: tracer}));
 
 app.get('/api/currencies', (req, res) => {

@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const Product = require("./product-model")
-const opentracing = require('express-opentracing');
+const middleware = require('express-opentracing').default;
 const app = express();
 
 dotenv.config();
