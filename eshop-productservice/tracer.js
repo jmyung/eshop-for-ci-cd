@@ -2,7 +2,7 @@
 
 const initTracer = require('jaeger-client').initTracer;
 
-export default (serviceName) => {
+module.exports = (serviceName) => {
     var config = {
         serviceName: serviceName,
         sampler: {
