@@ -1,6 +1,6 @@
 'use strict';
 
-import { initTracer } from 'jaeger-client';
+const initTracer = require('jaeger-client').initTracer;
 
 export default (serviceName) => {
     var config = {
