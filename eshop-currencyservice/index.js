@@ -1,11 +1,10 @@
-import express from 'express';
-import { json } from 'body-parser';
-import data from './data/initial-data.json';
-import { config } from 'dotenv';
-import middleware from 'express-opentracing';
-
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-config();
+const data = require('./data/initial-data.json');
+const dotenv = require('dotenv');
+dotenv.config();
+const middleware = require('express-opentracing').middleware;
 
 const tracer = require('./tracer')('currencyservice');
 
