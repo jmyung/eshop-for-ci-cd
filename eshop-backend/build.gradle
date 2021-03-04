@@ -26,9 +26,7 @@ dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     //for jaeger tracing
-    implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:3.1.2'
-    implementation 'io.opentracing.contrib:opentracing-spring-rabbitmq-starter:3.0.0'
-
+    implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
