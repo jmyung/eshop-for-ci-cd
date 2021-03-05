@@ -20,6 +20,8 @@ spec:
         env:
           - name: URL_PRODUCTSERVICE
             value: http://eshop-productservice:8092
+          - name: OTEL_EXPORTER_JAEGER_ENDPOINT
+            value: "http://jaeger-collector.istio-system.svc.cluster.local:14268/api/traces"  
 ---
 apiVersion: v1
 kind: Service
