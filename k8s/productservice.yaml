@@ -24,13 +24,8 @@ spec:
           value: "mongodb://admin:password@mongodb"
         - name: INIT_DATA
           value: "true"
-        resources:
-          requests:
-            cpu: 100m
-            memory: 64Mi
-          limits:
-            cpu: 200m
-            memory: 128Mi
+        - name: JAEGER_ENDPOINT
+          value: "http://jaeger-collector.istio-system.svc.cluster.local:14268/api/traces"
 ---
 apiVersion: v1
 kind: Service

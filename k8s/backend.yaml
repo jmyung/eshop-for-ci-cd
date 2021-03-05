@@ -25,13 +25,8 @@ spec:
               value: "jdbc:postgresql://postgres:5432/eshop_db"
             - name: SPRING_RABBITMQ_HOST
               value: rabbitmq
-          resources:
-            requests:
-              cpu: 500m
-              memory: 384Mi
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
+            - name: OPENTRACING_JAEGER_HTTP-SENDER_URL
+              value: "http://jaeger-collector.istio-system.svc.cluster.local:14268/api/traces"         
 ---
 apiVersion: v1
 kind: Service
