@@ -16,13 +16,6 @@ spec:
           image: eshop-frontend
           ports:
           - containerPort: 8080
-          resources:
-            requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
-              cpu: 200m
-              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service

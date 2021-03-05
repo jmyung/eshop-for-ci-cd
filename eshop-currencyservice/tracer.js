@@ -1,15 +1,34 @@
 'use strict';
- 
-const opentelemetry = require('@opentelemetry/api');
-const { NodeTracerProvider } = require('@opentelemetry/node');
-const { SimpleSpanProcessor } = require('@opentelemetry/tracing');
-const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
-const { B3Propagator } = require('@opentelemetry/propagator-b3');
- 
+
 module.exports = (serviceName) => {
-    const provider = new NodeTracerProvider();
-    const exporter = new JaegerExporter({ serviceName: serviceName });
-    provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
-    provider.register({ propagator: new B3Propagator() })
-    return opentelemetry.trace.getTracer(serviceName);
+    var { initTracerFromEnv, ZipkinB3TextMapCodec } = require('jaeger-client');
+    const opentracing = require('opentracing');
+
+    var config = {
+        serviceName: serviceName,
+        sampler: {
+            type: 'const',
+            param: 1,
+        },
+        reporter: {
+            logSpans: true,
+        },
+    };
+
+    var options = {
+        logger: {
+            info: function logInfo(msg) {
+                console.log('INFO  ', msg);
+            },
+            error: function logError(msg) {
+                console.log('ERROR ', msg);
+            },
+        },
+    };
+    var tracer = initTracerFromEnv(config, options);
+
+    var codec = new ZipkinB3TextMapCodec({ urlEncoding: true });
+    tracer.registerInjector(opentracing.FORMAT_HTTP_HEADERS, codec);
+    tracer.registerExtractor(opentracing.FORMAT_HTTP_HEADERS, codec);
+    return tracer;
 };
